@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>signup</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+`
+<link rel="stylesheet" type="text/css" href="" > 
+<script type="text/javascript" src=""></script> 	
+</head>
+<body >
+
+
+<div class="home-icon">
+                        <a href="index_1.html" class="text-white"><i class="mdi mdi-home"></i></a>
+                    </div>
+
+</div>
+</div>
+
+<section>
+	
+			<div class="container-fluid">
+			<div class="row">
+			<div class="col-sm-2"></div>
+
+			<div class="col-sm-8">
+				<h2 class="h2"> DEPENDENT FIELDS FORM</h2>
+				<br>
+				<br>
+
+				<div >
+					<form class="formstyle" id="registration_form" name="loginform" method="post" action="sucess.html">
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="inputEmail4">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="name">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputPassword4">Email</label>
+      <input type="email" class="form-control" id="email" placeholder="email">
+    </div>
+     <div class="form-group col-md-4">
+      <label for="inputPassword4">Phone</label>
+      <input type="text" class="form-control" id="Phone" placeholder="Phone">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputAddress">Address</label>
+    <input type="text" class="form-control" id="Address" placeholder="Address">
+  </div>
+  <div class="form-group">
+       <div class="form-group col-md-8">
+
+    <label for="inputAddress2">Comment</label>
+    <input type="text" class="form-control" id="Comment" placeholder="comment">
+  </div>
+
+        <div class="form-group col-md-4">
+
+    <label for="inputAddress2">Age</label>
+    <input type="text" class="form-control" id="Age" placeholder="Age">
+  </div>
+</div>
+
+
+  <div class="form-row">
+     <div class="form-group col-md-4">
+      <label for="inputState">country</label>
+      <select  name="country" id="country" class="form-control">
+        <option value="">select</option>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputState">State</label>
+      <select name="state" id="state" class="form-control">
+        <option value="">select</option>
+      </select>
+    </div>
+     <div class="form-group col-md-3">
+      <label for="inputState">city</label>
+      <select name="city" id="city" class="form-control">
+        <option  value="">selct city</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Zip</label>
+      <input type="text" class="form-control" id="Zip">
+    </div>
+  </div>
+ <div class="form-group">
+  <button type="submit" class="btn btn-primary bt">Sign in</button>
+  </div>
+</form>
+			</div>
+			<div class="col-sm-2"></div>
+
+</section>
+</div>
+</body>
+</html>
+
+
+
+<script>
+$(document).ready(function(){
+
+ load_json_data('country');
+
+ function load_json_data(id, parent_id)
+ {
+  var html_code = '';
+  $.getJSON('http://127.0.0.1:8080/country_state_city.json', function(data){
+
+   html_code += '<option value="">Select '+id+'</option>';
+   $.each(data, function(key, value){
+    if(id == 'country')
+    {
+     if(value.parent_id == '0')
+     {
+      html_code += '<option value="'+value.id+'">'+value.name+'</option>';
+     }
+    }
+    else
+    {
+     if(value.parent_id == parent_id)
+     {
+      html_code += '<option value="'+value.id+'">'+value.name+'</option>';
+     }
+    }
+   });
+   $('#'+id).html(html_code);	
+  });
+
+ }
+
+ $(document).on('change', '#country', function(){
+  var country_id = $(this).val();
+  if(country_id != '')
+  {
+   load_json_data('state', country_id);
+  }
+  else
+  {
+   $('#state').html('<option value="">Select state</option>');
+   $('#city').html('<option value="">Select city</option>');
+  }
+ });
+ $(document).on('change', '#state', function(){
+  var state_id = $(this).val();
+  if(state_id != '')
+  {
+   load_json_data('city', state_id);
+  }
+  else
+  {
+   $('#city').html('<option value="">Select city</option>');
+  }
+ });
+
+});
+// --------------------------------------------------
+
+$(document).ready(function(){
+
+alert("hello");
+
+	$("#registration_form").validate(
+		{
+			rules:{
+				      firstname: "required",
+				            lastname: "required",
+
+
+				email:{
+					required:!0
+					,        email: true
+
+				},
+				password:{
+					required:!0,minlength:8,
+					lowercase:!0,
+					upercase:!0,
+					specialchar:!0
+				}
+				},
+				messages:{
+					      firstname: "Please enter your firstname",
+					            email: "Please enter a valid email address",
+
+
+					password:{
+						required:"Enter password",
+						minlength:"length should be greater than 8",
+						lowercase:"One Lower case Letter",
+						upercase:" One Upper case Letter",
+						specialchar:"no special char"}
+
+					},
+
+					highlight: function (element) {
+            $(element).parent().addClass('error')
+        },
+        unhighlight: function (element) {
+            $(element).parent().removeClass('error')
+        }
+				}
+				) 
+
+});
+
+
+
+// var myJson = {
+//     "country":
+
+</script>
+
+
+
+
+
+<style type="text/css">
+.formstyle
+{
+	background-color: #ffffff;
+}
+
+body
+{
+	background-color:#6362b8;
+	font-family: 'Nunito', sans-serif;
+}
+div
+{
+	
+}
+
+
+.container
+{
+	position: relative;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+
+}
+.form-control
+{
+	border-top: none;
+	border-right: none;
+	border-left: none;
+	border-bottom: solid;
+
+}
+.col-sm-4
+{
+	background-color: #6362b8;
+	width: ;
+	height: ;
+
+}
+
+.bt{
+	width: 100%;
+	padding: 10px 20px;
+	color: white;
+	position: relative;
+	font-family: 'Nunito', sans-serif;
+	background-color: #28D3AB;
+	font-size: 16px;
+	font-weight: 700;
+
+}
+
+.h2
+{
+	text-align:center;
+	color: white;
+}
+
+.button-logo {
+	background: url(/home/enbake/Desktop/index.png) no-repeat 6px center;
+	width: 100px;
+	height: 100px;
+	display: block;
+}
+
+.frm
+{
+	color:white;font-size:13px
+}
+
+.glyphicon.glyphicon-home
+{
+	font-size: 40px;
+	color: white;
+	margin-top: 25px; 
+	margin-left: 35px;
+}
+
+<!-- forgotpasswrd---->
+
+.hrefstyle
+{
+	color:white;text-decoration:none;
+}
+
+.pstyle
+{
+	text-align:center;color:white;
+}
+
+
+.href_forgot
+{
+	color:white;text-decoration:none;
+}
+
+.label_style
+{
+	color:white;font-size:13px
+}
+
+.p
+{
+	text-align:center;
+	color: grey;
+}
+
+.href_signin
+{
+	color:white;text-decoration:none;
+	font-size: 20px
+}
+
+form
+{
+	padding-right: 20px;
+	padding-left: 30px;
+	padding-bottom: 40px;
+	padding-top: 20px;
+}
+.lbsty
+{
+	color: grey;
+	text-align: center;
+}
+
+.error_form {
+	font-size: 15px;
+	font-family: Arial;
+	color: #FF0052;
+</style>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript CRUD</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/core.js"></script>  
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>     
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="style.css" />
+        <script type="text/javascript" src="functions.js"></script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+
+
+    </head>
+    <body style="background-color: lightgrey;">
+
+       </br></br></br></br>
+        <div class="container">
+               <h2 style="color:white;">CREATE TASk</h2>
+
+            <form id="frmPerson" class="form-horizontal">
+                <div class="form-group">
+                    <label for="task" class="col-sm-2 control-label">TASK</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="task" class="form-control" placeholder="TASK">
+                    </div>
+                </div>                    
+                <div class="form-group">
+                    <label for="datePicker" class="col-lg-2 control-label">DATE</label>
+                    <div class="col-sm-4">
+                <div class="input-group input-append date" id="datePicker">
+                <input type="text" class="form-control" name="date" />
+                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>                    </div>
+
+
+                </div>
+                <div class="form-group">
+                    <label for="assignedto" class="col-lg-2 control-label">ASSIGNED TO</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="assignedto" class="form-control" placeholder="ASSIGNED">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="status" class="col-lg-2 control-label">STATUS</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="status" class="form-control" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-sm-4">
+                        <input type="submit" value="add" id="add" class="btn btn-success"/>
+                    </div>
+                </div>
+            </form>
+        </div>      
+
+        <div class="container">
+            <table id="tblList" class="table table-bordered"></table>
+        </div>
+    </body>
+</html>

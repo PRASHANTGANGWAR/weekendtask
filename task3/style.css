@@ -1,0 +1,7 @@
+﻿/*Importar fuentes externas*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans|Montserrat);
+
+#tblList thead{
+    background: gray;
+    color: #FFF;
+}
